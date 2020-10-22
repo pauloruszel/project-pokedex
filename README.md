@@ -1,4 +1,4 @@
-# project-pokedex2 project
+# project-pokedex project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
