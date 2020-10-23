@@ -1,19 +1,36 @@
 package com.github.pauloruszel.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
+import com.github.pauloruszel.converter.GeneroConverter;
+import com.github.pauloruszel.enumeration.GeneroEnum;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Pokemon {
+public class Pokemon extends PanacheEntityBase implements Serializable {
+
+    private static final long serialVersionUID = 1529571625267903854L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idPokemon", length = 4, precision = 10)
     private Long id;
 
+    @Column(name = "nmPokemon", length = 50)
     private String nomePokemon;
+
+    @Column(name = "dsAltura", length = 10)
     private String altura;
+
+    @Column(name = "dsPeso", length = 10)
     private String peso;
-    private String genero;
+
+    @Column(name = "dsGenero", length = 1)
+    @Convert(converter = GeneroConverter.class)
+    private GeneroEnum genero;
+
+    @Column(name = "dsCategoria", length = 40)
     private String categoria;
 
     public Long getId() {
@@ -48,11 +65,11 @@ public class Pokemon {
         this.peso = peso;
     }
 
-    public String getGenero() {
+    public GeneroEnum getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(GeneroEnum genero) {
         this.genero = genero;
     }
 
@@ -64,21 +81,4 @@ public class Pokemon {
         this.categoria = categoria;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pokemon pokemon = (Pokemon) o;
-        return Objects.equals(id, pokemon.id) &&
-                Objects.equals(nomePokemon, pokemon.nomePokemon) &&
-                Objects.equals(altura, pokemon.altura) &&
-                Objects.equals(peso, pokemon.peso) &&
-                Objects.equals(genero, pokemon.genero) &&
-                Objects.equals(categoria, pokemon.categoria);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomePokemon, altura, peso, genero, categoria);
-    }
 }

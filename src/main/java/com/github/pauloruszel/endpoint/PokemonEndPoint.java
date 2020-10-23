@@ -1,24 +1,31 @@
 package com.github.pauloruszel.endpoint;
 
+import com.github.pauloruszel.converter.PokemonConverter;
+import com.github.pauloruszel.dto.PokemonDTO;
 import com.github.pauloruszel.model.Pokemon;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/pokemons")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PokemonEndPoint {
 
-    @Inject
-    EntityManager entityManager;
-
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Pokemon> getPokemons() {
-        return entityManager.createQuery("select p from Pokemon p", Pokemon.class).getResultList();
+        return Pokemon.listAll();
+    }
+
+    @POST
+    @Transactional
+    public Response addPokemon(@RequestBody PokemonDTO dto) {
+        Pokemon pokemon = PokemonConverter.converter(dto);
+        pokemon.persist();
+        return Response.ok(pokemon).status(Response.Status.CREATED).build();
     }
 }

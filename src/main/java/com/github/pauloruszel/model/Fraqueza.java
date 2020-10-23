@@ -1,11 +1,25 @@
 package com.github.pauloruszel.model;
 
-import java.util.Objects;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-public class Fraqueza {
+import javax.persistence.*;
+import java.io.Serializable;
 
+public class Fraqueza extends PanacheEntityBase implements Serializable {
+
+    private static final long serialVersionUID = -5271505840505284882L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idFraqueza", length = 4, precision = 10)
     private Long id;
+
+    @Column(name = "nmFraqueza", length = 70)
     private String nomeFraqueza;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPokemon")
+    private Pokemon pokemon;
 
     public Long getId() {
         return id;
@@ -23,17 +37,12 @@ public class Fraqueza {
         this.nomeFraqueza = nomeFraqueza;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Fraqueza fraqueza = (Fraqueza) o;
-        return Objects.equals(id, fraqueza.id) &&
-                Objects.equals(nomeFraqueza, fraqueza.nomeFraqueza);
+    public Pokemon getPokemon() {
+        return pokemon;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomeFraqueza);
+    public void setPokemon(Pokemon pokemon) {
+        this.pokemon = pokemon;
     }
+
 }
