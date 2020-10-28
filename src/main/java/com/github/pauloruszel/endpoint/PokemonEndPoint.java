@@ -45,9 +45,8 @@ public class PokemonEndPoint {
     public Response updatePokemon(@RequestBody @Valid PokemonDTO dto) {
         Pokemon pokemon = Pokemon.findById(dto.getId());
         if (pokemon != null) {
-            Pokemon retorno = PokemonConverter.converter(dto);
-            retorno.getEntityManager().merge(retorno);
-            return Response.ok(retorno).status(Response.Status.OK).build();
+            pokemon = PokemonConverter.converter(pokemon, dto);
+            return Response.ok(pokemon).status(Response.Status.OK).build();
         }
         return Response.ok(pokemon).status(Response.Status.NOT_FOUND).build();
     }

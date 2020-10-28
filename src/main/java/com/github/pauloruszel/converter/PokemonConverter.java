@@ -23,6 +23,16 @@ public class PokemonConverter {
         return pokemon;
     }
 
+    public static Pokemon converter(Pokemon entidade, PokemonDTO dto) {
+        entidade.setId(dto.getId());
+        entidade.setNomePokemon(dto.getNomePokemon());
+        entidade.setAltura(dto.getAltura());
+        entidade.setCategoria(dto.getCategoria());
+        entidade.setGenero(dto.getGenero());
+        entidade.setPeso(dto.getPeso());
+        return entidade;
+    }
+
 
     public static PokemonDTO converter(Pokemon pokemon) {
         var pokemonDTO = new PokemonDTO();
