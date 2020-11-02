@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Habilidade extends PanacheEntityBase implements Serializable {
 
     private static final long serialVersionUID = -969955228493671471L;

@@ -16,6 +16,10 @@ public class PokemonDTO implements Serializable {
     private GeneroEnum genero;
     private String categoria;
 
+    private FraquezaDTO fraqueza;
+    private HabilidadeDTO habilidade;
+    private TipoDTO tipo;
+
     public PokemonDTO() {
     }
 
@@ -76,6 +80,30 @@ public class PokemonDTO implements Serializable {
         this.categoria = categoria;
     }
 
+    public FraquezaDTO getFraqueza() {
+        return fraqueza;
+    }
+
+    public void setFraqueza(FraquezaDTO fraqueza) {
+        this.fraqueza = fraqueza;
+    }
+
+    public HabilidadeDTO getHabilidade() {
+        return habilidade;
+    }
+
+    public void setHabilidade(HabilidadeDTO habilidade) {
+        this.habilidade = habilidade;
+    }
+
+    public TipoDTO getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoDTO tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,12 +113,15 @@ public class PokemonDTO implements Serializable {
                 Objects.equals(nomePokemon, that.nomePokemon) &&
                 Objects.equals(altura, that.altura) &&
                 Objects.equals(peso, that.peso) &&
-                Objects.equals(genero, that.genero) &&
-                Objects.equals(categoria, that.categoria);
+                genero == that.genero &&
+                Objects.equals(categoria, that.categoria) &&
+                Objects.equals(fraqueza, that.fraqueza) &&
+                Objects.equals(habilidade, that.habilidade) &&
+                Objects.equals(tipo, that.tipo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nomePokemon, altura, peso, genero, categoria);
+        return Objects.hash(id, nomePokemon, altura, peso, genero, categoria, fraqueza, habilidade, tipo);
     }
 }
