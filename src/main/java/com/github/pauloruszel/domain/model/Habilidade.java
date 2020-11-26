@@ -1,7 +1,6 @@
 package com.github.pauloruszel.domain.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Habilidade extends BaseEntity {
@@ -42,18 +41,4 @@ public class Habilidade extends BaseEntity {
         this.pokemon = pokemon;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Habilidade that = (Habilidade) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(nomeHabilidade, that.nomeHabilidade) &&
-                Objects.equals(pokemon, that.pokemon);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomeHabilidade, pokemon);
-    }
 }

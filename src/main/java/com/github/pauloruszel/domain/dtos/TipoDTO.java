@@ -1,7 +1,5 @@
 package com.github.pauloruszel.domain.dtos;
 
-import java.util.Objects;
-
 public class TipoDTO implements BaseDTO {
 
     private Long id;
@@ -41,18 +39,4 @@ public class TipoDTO implements BaseDTO {
         this.pokemonDTO = pokemonDTO;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TipoDTO that = (TipoDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(nomeTipo, that.nomeTipo) &&
-                Objects.equals(pokemonDTO, that.pokemonDTO);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomeTipo, pokemonDTO);
-    }
 }
