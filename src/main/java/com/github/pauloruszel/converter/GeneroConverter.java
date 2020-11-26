@@ -1,6 +1,6 @@
 package com.github.pauloruszel.converter;
 
-import com.github.pauloruszel.enumeration.GeneroEnum;
+import com.github.pauloruszel.domain.enumeration.GeneroEnum;
 
 import javax.persistence.AttributeConverter;
 

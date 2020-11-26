@@ -1,13 +1,8 @@
-package com.github.pauloruszel.dto;
+package com.github.pauloruszel.domain.dtos;
 
-import com.github.pauloruszel.enumeration.GeneroEnum;
+import com.github.pauloruszel.domain.enumeration.GeneroEnum;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-public class PokemonDTO implements Serializable {
-
-    private static final long serialVersionUID = -8311765238189347515L;
+public class PokemonDTO implements BaseDTO {
 
     private Long id;
     private String nomePokemon;
@@ -104,24 +99,4 @@ public class PokemonDTO implements Serializable {
         this.tipo = tipo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PokemonDTO that = (PokemonDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(nomePokemon, that.nomePokemon) &&
-                Objects.equals(altura, that.altura) &&
-                Objects.equals(peso, that.peso) &&
-                genero == that.genero &&
-                Objects.equals(categoria, that.categoria) &&
-                Objects.equals(fraqueza, that.fraqueza) &&
-                Objects.equals(habilidade, that.habilidade) &&
-                Objects.equals(tipo, that.tipo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomePokemon, altura, peso, genero, categoria, fraqueza, habilidade, tipo);
-    }
 }

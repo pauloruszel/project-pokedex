@@ -1,11 +1,8 @@
-package com.github.pauloruszel.dto;
+package com.github.pauloruszel.domain.dtos;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class TipoDTO implements Serializable {
-
-    private static final long serialVersionUID = 8256732936274107131L;
+public class TipoDTO implements BaseDTO {
 
     private Long id;
     private String nomeTipo;

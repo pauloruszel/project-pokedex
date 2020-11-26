@@ -1,15 +1,10 @@
-package com.github.pauloruszel.model;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+package com.github.pauloruszel.domain.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Tipo extends PanacheEntityBase implements Serializable {
-
-    private static final long serialVersionUID = 3419642924389947466L;
+public class Tipo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

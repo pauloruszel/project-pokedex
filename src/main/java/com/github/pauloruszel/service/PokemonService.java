@@ -1,61 +1,64 @@
 package com.github.pauloruszel.service;
 
-import com.github.pauloruszel.converter.PokemonConverter;
-import com.github.pauloruszel.dto.MensagemRetornoDTO;
-import com.github.pauloruszel.dto.PokemonDTO;
-import com.github.pauloruszel.model.Pokemon;
-import com.github.pauloruszel.util.MensagemUtil;
+import com.github.pauloruszel.domain.dtos.MensagemRetornoDTO;
+import com.github.pauloruszel.domain.dtos.PokemonDTO;
+import com.github.pauloruszel.domain.model.Pokemon;
+import com.github.pauloruszel.domain.util.MensagemUtil;
+import com.github.pauloruszel.exception.ParametroInvalidoException;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
-public class PokemonService {
+public class PokemonService extends BaseService {
 
-    public List<Pokemon> getAllPokemons() {
+    public List<Pokemon> findAll() {
         return Pokemon.listAll();
     }
 
-    public PokemonDTO getPokemonById(Long id) {
-        if (id != null && id != 0) {
-            Pokemon pokemon = Pokemon.findById(id);
-            if (pokemon != null) {
-                return PokemonConverter.converter(pokemon);
-            }
-        }
-        return null;
+    public PokemonDTO getById(final Long id) throws ParametroInvalidoException {
+        if (id == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
+
+        final Pokemon pokemon = Pokemon.findById(id);
+        if (pokemon == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
+
+        return getConverter().map(pokemon, PokemonDTO.class);
     }
 
-    public PokemonDTO savePokemon(PokemonDTO dto) {
-        PokemonDTO retorno = null;
-        if (dto != null) {
-            Pokemon pokemon = PokemonConverter.converter(dto);
-            pokemon.persist();
-            retorno = PokemonConverter.converter(pokemon);
-        }
-        return retorno;
+    public PokemonDTO save(final PokemonDTO dto) throws ParametroInvalidoException {
+        if (Objects.isNull(dto))
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
+
+        final Pokemon pokemon = getConverter().map(dto, Pokemon.class);
+        pokemon.persist();
+        return getConverter().map(pokemon, PokemonDTO.class);
     }
 
-    public PokemonDTO updatePokemon(PokemonDTO dto) {
-        if (dto.getId() == null) {
-            return null;
-        }
+    public PokemonDTO update(final PokemonDTO dto) throws ParametroInvalidoException {
+        if (dto == null || dto.getId() == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
 
         Pokemon pokemon = Pokemon.findById(dto.getId());
-        if (pokemon != null) {
-            pokemon = PokemonConverter.converter(pokemon, dto);
-            return PokemonConverter.converter(pokemon);
-        }
-        return null;
+        if (Objects.isNull(pokemon))
+            throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
+
+        pokemon = getConverter().map(dto, Pokemon.class);
+        return getConverter().map(pokemon, PokemonDTO.class);
     }
 
-    public MensagemRetornoDTO deletePokemon(Long id) {
-        Pokemon pokemon = Pokemon.findById(id);
-        if (pokemon != null) {
-            pokemon.delete();
-            return new MensagemRetornoDTO(MensagemUtil.MSG_REGISTRO_EXCLUIDO);
-        }
-        return new MensagemRetornoDTO(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
+    public MensagemRetornoDTO delete(final Long id) throws ParametroInvalidoException {
+        if (id == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
+
+        final Pokemon pokemon = Pokemon.findById(id);
+        if (Objects.isNull(pokemon))
+            throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
+
+        pokemon.delete();
+        return new MensagemRetornoDTO(MensagemUtil.MSG_REGISTRO_EXCLUIDO);
     }
 
 }

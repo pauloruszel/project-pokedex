@@ -1,6 +1,6 @@
-package com.github.pauloruszel.endpoint;
+package com.github.pauloruszel.resource;
 
-import com.github.pauloruszel.model.Tipo;
+import com.github.pauloruszel.domain.model.Tipo;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,7 +10,7 @@ import java.util.List;
 @Path("/pokemons/tipo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class TipoEndPoint {
+public class TipoResource {
 
     @GET
     public List<Tipo> getTipos() {

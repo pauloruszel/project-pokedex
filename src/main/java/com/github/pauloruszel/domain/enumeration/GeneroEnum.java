@@ -1,4 +1,4 @@
-package com.github.pauloruszel.enumeration;
+package com.github.pauloruszel.domain.enumeration;
 
 public enum GeneroEnum {
 

@@ -1,16 +1,12 @@
-package com.github.pauloruszel.model;
+package com.github.pauloruszel.domain.model;
 
 import com.github.pauloruszel.converter.GeneroConverter;
-import com.github.pauloruszel.enumeration.GeneroEnum;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import com.github.pauloruszel.domain.enumeration.GeneroEnum;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Pokemon extends PanacheEntityBase implements Serializable {
-
-    private static final long serialVersionUID = 1529571625267903854L;
+public class Pokemon extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

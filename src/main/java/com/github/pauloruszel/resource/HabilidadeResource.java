@@ -1,6 +1,6 @@
-package com.github.pauloruszel.endpoint;
+package com.github.pauloruszel.resource;
 
-import com.github.pauloruszel.model.Habilidade;
+import com.github.pauloruszel.domain.model.Habilidade;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,7 +10,7 @@ import java.util.List;
 @Path("/pokemons/habilidade")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class HabilidadeEndPoint {
+public class HabilidadeResource {
 
     @GET
     public List<Habilidade> getHabilidades() {

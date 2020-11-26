@@ -1,15 +1,10 @@
-package com.github.pauloruszel.model;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+package com.github.pauloruszel.domain.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Habilidade extends PanacheEntityBase implements Serializable {
-
-    private static final long serialVersionUID = -969955228493671471L;
+public class Habilidade extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

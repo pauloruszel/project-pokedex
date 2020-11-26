@@ -1,14 +1,9 @@
-package com.github.pauloruszel.model;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+package com.github.pauloruszel.domain.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Fraqueza extends PanacheEntityBase implements Serializable {
-
-    private static final long serialVersionUID = -5271505840505284882L;
+public class Fraqueza extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

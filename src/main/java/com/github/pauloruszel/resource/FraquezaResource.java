@@ -1,6 +1,6 @@
-package com.github.pauloruszel.endpoint;
+package com.github.pauloruszel.resource;
 
-import com.github.pauloruszel.model.Fraqueza;
+import com.github.pauloruszel.domain.model.Fraqueza;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,7 +10,7 @@ import java.util.List;
 @Path("/pokemons/fraqueza")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class FraquezaEndPoint {
+public class FraquezaResource {
 
     @GET
     public List<Fraqueza> getFraquezas() {
