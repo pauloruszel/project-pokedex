@@ -2,9 +2,17 @@ package com.github.pauloruszel.domain.model;
 
 import com.github.pauloruszel.converter.GeneroConverter;
 import com.github.pauloruszel.domain.enumeration.GeneroEnum;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Pokemon extends BaseEntity {
 
@@ -28,53 +36,5 @@ public class Pokemon extends BaseEntity {
 
     @Column(name = "dsCategoria", length = 40)
     private String categoria;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomePokemon() {
-        return nomePokemon;
-    }
-
-    public void setNomePokemon(String nomePokemon) {
-        this.nomePokemon = nomePokemon;
-    }
-
-    public String getAltura() {
-        return altura;
-    }
-
-    public void setAltura(String altura) {
-        this.altura = altura;
-    }
-
-    public String getPeso() {
-        return peso;
-    }
-
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
-
-    public GeneroEnum getGenero() {
-        return genero;
-    }
-
-    public void setGenero(GeneroEnum genero) {
-        this.genero = genero;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
 }

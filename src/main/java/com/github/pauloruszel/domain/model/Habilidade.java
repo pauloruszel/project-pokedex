@@ -1,7 +1,16 @@
 package com.github.pauloruszel.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Habilidade extends BaseEntity {
 
@@ -16,29 +25,5 @@ public class Habilidade extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPokemon")
     private Pokemon pokemon;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomeHabilidade() {
-        return nomeHabilidade;
-    }
-
-    public void setNomeHabilidade(String nomeHabilidade) {
-        this.nomeHabilidade = nomeHabilidade;
-    }
-
-    public Pokemon getPokemon() {
-        return pokemon;
-    }
-
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
-    }
 
 }

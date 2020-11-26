@@ -22,7 +22,7 @@ public class PokemonService extends BaseService {
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
 
         final Pokemon pokemon = Pokemon.findById(id);
-        if (pokemon == null)
+        if (Objects.isNull(pokemon))
             throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
 
         return getConverter().map(pokemon, PokemonDTO.class);

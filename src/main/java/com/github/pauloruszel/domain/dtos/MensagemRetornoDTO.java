@@ -1,24 +1,16 @@
 package com.github.pauloruszel.domain.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MensagemRetornoDTO implements BaseDTO {
 
     private String mensagem;
-
-    public MensagemRetornoDTO() {
-        super();
-    }
-
-    public MensagemRetornoDTO(String mensagem) {
-        super();
-        this.mensagem = mensagem;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
 
 }

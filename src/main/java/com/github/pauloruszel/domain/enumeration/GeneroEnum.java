@@ -1,5 +1,12 @@
 package com.github.pauloruszel.domain.enumeration;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public enum GeneroEnum {
 
     MASCULINO("M", "Masculino"),
@@ -9,16 +16,4 @@ public enum GeneroEnum {
     private String chave;
     private String valor;
 
-    GeneroEnum(String chave, String valor) {
-        this.chave = chave;
-        this.valor = valor;
-    }
-
-    public String getChave() {
-        return chave;
-    }
-
-    public String getValor() {
-        return valor;
-    }
 }
