@@ -7,11 +7,22 @@ import com.github.pauloruszel.domain.util.MensagemUtil;
 import com.github.pauloruszel.exception.ParametroInvalidoException;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
 public class PokemonService extends BaseService {
+
+    @Inject
+    HabilidadeService habilidadeService;
+
+    @Inject
+    FraquezaService fraquezaService;
+
+    @Inject
+    TipoService tipoService;
 
     public List<Pokemon> findAll() {
         return Pokemon.listAll();
@@ -34,7 +45,7 @@ public class PokemonService extends BaseService {
 
         final Pokemon pokemon = getConverter().map(dto, Pokemon.class);
         pokemon.persist();
-        return getConverter().map(pokemon, PokemonDTO.class);
+        return this.saveDependencies(dto, pokemon.getId());
     }
 
     public PokemonDTO update(final PokemonDTO dto) throws ParametroInvalidoException {
@@ -60,5 +71,46 @@ public class PokemonService extends BaseService {
         pokemon.delete();
         return new MensagemRetornoDTO(MensagemUtil.MSG_REGISTRO_EXCLUIDO);
     }
+
+
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    private PokemonDTO saveDependencies(final PokemonDTO dto, final Long idPokemon) throws ParametroInvalidoException {
+        if (idPokemon == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
+
+        dto.setId(idPokemon);
+        fraquezaService.savePokemonToFraqueza(dto, idPokemon);
+        habilidadeService.savePokemonToHabilidade(dto, idPokemon);
+        tipoService.savePokemonToTipo(dto, idPokemon);
+
+        return dto;
+    }
+
+//    private PokemonDTO findDependencies(final PokemonDTO dto) throws ParametroInvalidoException {
+//        if (dto == null)
+//            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
+//
+//        final Pokemon pokemon = Pokemon.findById(dto.getId());
+//        if (pokemon == null)
+//            throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
+//
+//        var fraqueza = fraquezaService.getByIdPokemon(pokemon);
+//        if (Objects.nonNull(fraqueza)) {
+//            dto.setFraqueza(fraqueza);
+//        }
+//
+//        var habilidade = habilidadeService.getByIdPokemon(pokemon);
+//        if (Objects.nonNull(habilidade)) {
+//            dto.setHabilidade(habilidade);
+//        }
+//
+//        var tipo = tipoService.getByIdPokemon(pokemon);
+//        if (Objects.nonNull(tipo)) {
+//            dto.setTipo(tipo);
+//        }
+//
+//        return dto;
+//    }
+
 
 }

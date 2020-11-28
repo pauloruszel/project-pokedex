@@ -1,6 +1,7 @@
 package com.github.pauloruszel.service;
 
 import com.github.pauloruszel.domain.dtos.MensagemRetornoDTO;
+import com.github.pauloruszel.domain.dtos.PokemonDTO;
 import com.github.pauloruszel.domain.dtos.TipoDTO;
 import com.github.pauloruszel.domain.model.Pokemon;
 import com.github.pauloruszel.domain.model.Tipo;
@@ -8,11 +9,15 @@ import com.github.pauloruszel.domain.util.MensagemUtil;
 import com.github.pauloruszel.exception.ParametroInvalidoException;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
 public class TipoService extends BaseService {
+
+    @Inject
+    PokemonService pokemonService;
 
     public List<Tipo> findAll() {
         return Tipo.listAll();
@@ -65,6 +70,21 @@ public class TipoService extends BaseService {
 
         tipo.delete();
         return new MensagemRetornoDTO(MensagemUtil.MSG_REGISTRO_EXCLUIDO);
+    }
+
+    public void savePokemonToTipo(final PokemonDTO dto, final Long idPokemon) throws ParametroInvalidoException {
+        if (dto == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
+
+        final TipoDTO tipoPokemon = dto.getTipo();  // Tavez eu deva pesquisar o Tipo antes de setar
+        if (tipoPokemon == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_TIPO_DTO_INVALIDO);
+
+        final PokemonDTO pokemonDTO = getConverter().map(pokemonService.getById(idPokemon), PokemonDTO.class);
+        tipoPokemon.setPokemonDTO(pokemonDTO);
+
+        final Tipo tipo = getConverter().map(tipoPokemon, Tipo.class);
+        tipo.persist();
     }
 
 }
