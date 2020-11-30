@@ -9,12 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PokemonDTO implements BaseDTO {
+public class CaracteristicaDTO implements BaseDTO {
 
     private Long id;
-    private String nomePokemon;
-    private GeneroDTO genero;
-    private CategoriaDTO categoria;
-    private CaracteristicaDTO caracteristica;
+    private String nomeCaracteristica;
+    private String altura;
+    private String peso;
+    private String idade;
 
 }

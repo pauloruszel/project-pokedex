@@ -1,5 +1,6 @@
 package com.github.pauloruszel.domain.dtos;
 
+import com.github.pauloruszel.domain.enumeration.SituacaoPadraoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PokemonDTO implements BaseDTO {
+public class TipoHabilidadeDTO implements BaseDTO {
 
     private Long id;
-    private String nomePokemon;
-    private GeneroDTO genero;
-    private CategoriaDTO categoria;
-    private CaracteristicaDTO caracteristica;
+    private String nomeTipoHabilidade;
+    private HabilidadeDTO habilidade;
+    private SituacaoPadraoEnum ativo;
 
 }

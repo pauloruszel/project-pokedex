@@ -31,4 +31,8 @@ public class Pokemon extends BaseEntity {
     @JoinColumn(name = "idCategoria", referencedColumnName = "idcategoria")
     private Categoria categoria;
 
+    @OneToOne
+    @JoinColumn(name = "idCaracteristica", referencedColumnName = "idcaracteristica")
+    private Caracteristica caracteristica;
+
 }

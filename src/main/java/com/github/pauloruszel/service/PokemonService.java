@@ -11,15 +11,17 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
+import static javax.transaction.Transactional.TxType.NOT_SUPPORTED;
+
 @ApplicationScoped
 public class PokemonService extends BaseService {
 
-    @Transactional(Transactional.TxType.NOT_SUPPORTED)
+    @Transactional(NOT_SUPPORTED)
     public List<Pokemon> findAll() {
         return Pokemon.listAll();
     }
 
-    @Transactional(Transactional.TxType.NOT_SUPPORTED)
+    @Transactional(NOT_SUPPORTED)
     public PokemonDTO getById(final Long id) throws ParametroInvalidoException {
         if (id == null)
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
@@ -42,15 +44,18 @@ public class PokemonService extends BaseService {
     }
 
     @Transactional
-    public PokemonDTO update(final PokemonDTO dto) throws ParametroInvalidoException {
-        if (dto == null || dto.getId() == null)
+    public PokemonDTO update(final Long id, final PokemonDTO dto) throws ParametroInvalidoException {
+        if (id == null)
+            throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
+
+        if (dto == null)
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
 
-        Pokemon pokemon = Pokemon.findById(dto.getId());
+        Pokemon pokemon = Pokemon.findById(id);
         if (Objects.isNull(pokemon))
             throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
-
-        pokemon = getConverter().map(dto, Pokemon.class);
+        final var pokemonEditado = getConverter().map(dto, Pokemon.class);
+        pokemon = pokemonEditado;
         return getConverter().map(pokemon, PokemonDTO.class);
     }
 

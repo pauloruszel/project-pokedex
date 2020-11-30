@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,8 +29,8 @@ public class PokemonResource extends BaseResource {
     }
 
     @GET
-    @Path("{id}")
-    public Response getPokemon(@PathParam("id") Long id) throws ParametroInvalidoException {
+    @Path("{id:[1-9][0-9]*}")
+    public Response getPokemon(@PathParam("id") @NotNull Long id) throws ParametroInvalidoException {
         final var retorno = pokemonService.getById(id);
         if (retorno != null) {
             return toResponse(Status.OK, retorno);
@@ -44,8 +45,10 @@ public class PokemonResource extends BaseResource {
     }
 
     @PUT
-    public Response updatePokemon(@RequestBody @Valid PokemonDTO dto) throws ParametroInvalidoException {
-        final var retorno = pokemonService.update(dto);
+    @Path("{id:[1-9][0-9]*}")
+    public Response updatePokemon(@PathParam("id") @NotNull Long id,
+                                  @RequestBody @Valid PokemonDTO dto) throws ParametroInvalidoException {
+        final var retorno = pokemonService.update(id, dto);
         if (retorno != null) {
             return toResponse(Status.OK, retorno);
         }
@@ -54,7 +57,7 @@ public class PokemonResource extends BaseResource {
 
     @DELETE
     @Path("{id:[1-9][0-9]*}")
-    public Response deletePokemon(@PathParam("id") Long id) throws ParametroInvalidoException {
+    public Response deletePokemon(@PathParam("id") @NotNull Long id) throws ParametroInvalidoException {
         final var mensagemRetornoDTO = pokemonService.delete(id);
         if (mensagemRetornoDTO.getMensagem().equals(MensagemUtil.MSG_REGISTRO_EXCLUIDO)) {
             return toResponse(Status.OK, mensagemRetornoDTO);

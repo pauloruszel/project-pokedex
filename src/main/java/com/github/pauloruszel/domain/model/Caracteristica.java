@@ -32,8 +32,4 @@ public class Caracteristica extends BaseEntity {
     @Column(name = "dsIdade", length = 10)
     private String idade;
 
-    @OneToOne
-    @JoinColumn(name = "idPokemon", referencedColumnName = "idpokemon")
-    private Pokemon pokemon;
-
 }

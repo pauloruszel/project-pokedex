@@ -1,13 +1,13 @@
 --- Caracteristicas
 INSERT INTO pokedex.categoria (stativo, nmcategoria) VALUES('A', 'Mouse');
+INSERT INTO pokedex.caracteristica (dsaltura, dsidade, nmcaracteristica, dspeso) VALUES('0.4 m', 'Sem dados', 'Pikachu', '6.0 kg');
 
 --- Generos
+INSERT INTO pokedex.genero (idgenero, stativo, nmgenero) VALUES(1, 'A', 'MASCULINO');
 INSERT INTO pokedex.genero (idgenero, stativo, nmgenero) VALUES(2, 'A', 'FEMININO');
 INSERT INTO pokedex.genero (idgenero, stativo, nmgenero) VALUES(3, 'A', 'OUTROS');
-INSERT INTO pokedex.genero (idgenero, stativo, nmgenero) VALUES(1, 'A', 'MASCULINO');
 
-INSERT INTO pokedex.pokemon (nmpokemon, idcategoria, idgenero) VALUES('Pikachu', 1, 1);
-INSERT INTO pokedex.caracteristica (dsaltura, dsidade, nmcaracteristica, dspeso, idpokemon) VALUES('0.4 m', 'Sem dados', 'Pikachu', '6.0 kg', 1);
+INSERT INTO pokedex.pokemon (nmpokemon, idcaracteristica, idcategoria, idgenero) VALUES('Pikachu', 1, 1, 1);
 
 --- Atributos de Fraqueza e Habilidade
 INSERT INTO pokedex.fraqueza (stativo, nmfraqueza) VALUES('A', 'Terra');
