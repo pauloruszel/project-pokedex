@@ -1,8 +1,5 @@
 package com.github.pauloruszel.domain.util;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public final class MensagemUtil {
 
     // Mensagens genéricas.
@@ -17,4 +14,7 @@ public final class MensagemUtil {
     public static final String MSG_PARAMETRO_HABILIDADE_DTO_INVALIDO = "Parametro HabilidadeDTO inválido.";
     public static final String MSG_PARAMETRO_TIPO_DTO_INVALIDO = "Parametro TipoDTO inválido.";
     public static final String MSG_PARAMETRO_FRAQUEZA_DTO_INVALIDO = "Parametro FraquezaDTO inválido.";
+
+    private MensagemUtil() {
+    }
 }

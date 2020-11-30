@@ -21,11 +21,11 @@ public class HabilidadePokemon extends BaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idHabilidade")
+    @JoinColumn(name = "idHabilidade", referencedColumnName = "idhabilidade")
     private Habilidade habilidade;
 
     @ManyToOne
-    @JoinColumn(name = "idPokemon")
+    @JoinColumn(name = "idPokemon", referencedColumnName = "idpokemon")
     private Pokemon pokemon;
 
 }

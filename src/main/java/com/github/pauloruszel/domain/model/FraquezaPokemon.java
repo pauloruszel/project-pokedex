@@ -21,11 +21,11 @@ public class FraquezaPokemon extends BaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idFraqueza")
+    @JoinColumn(name = "idFraqueza", referencedColumnName = "idfraqueza")
     private Fraqueza fraqueza;
 
     @ManyToOne
-    @JoinColumn(name = "idPokemon")
+    @JoinColumn(name = "idPokemon", referencedColumnName = "idpokemon")
     private Pokemon pokemon;
 
 }

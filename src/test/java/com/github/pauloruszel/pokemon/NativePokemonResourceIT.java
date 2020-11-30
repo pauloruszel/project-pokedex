@@ -1,9 +1,9 @@
-package com.github.pauloruszel.hello;
+package com.github.pauloruszel.pokemon;
 
 import io.quarkus.test.junit.NativeImageTest;
 
 @NativeImageTest
-public class NativeHelloResourceIT extends HelloResourceTest {
+public class NativePokemonResourceIT extends PokemonResourceTest {
 
     // Execute the same tests but in native mode.
 }

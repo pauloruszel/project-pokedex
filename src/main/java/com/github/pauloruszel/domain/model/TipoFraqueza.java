@@ -25,7 +25,7 @@ public class TipoFraqueza extends BaseEntity {
     private String nomeTipoFraqueza;
 
     @ManyToOne
-    @JoinColumn(name = "idFraqueza")
+    @JoinColumn(name = "idFraqueza", referencedColumnName = "idfraqueza")
     private Fraqueza fraqueza;
 
     @Enumerated(EnumType.STRING)

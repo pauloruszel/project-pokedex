@@ -7,16 +7,19 @@ import com.github.pauloruszel.domain.util.MensagemUtil;
 import com.github.pauloruszel.exception.ParametroInvalidoException;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
 public class PokemonService extends BaseService {
 
+    @Transactional(Transactional.TxType.NOT_SUPPORTED)
     public List<Pokemon> findAll() {
         return Pokemon.listAll();
     }
 
+    @Transactional(Transactional.TxType.NOT_SUPPORTED)
     public PokemonDTO getById(final Long id) throws ParametroInvalidoException {
         if (id == null)
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);
@@ -28,6 +31,7 @@ public class PokemonService extends BaseService {
         return getConverter().map(pokemon, PokemonDTO.class);
     }
 
+    @Transactional
     public PokemonDTO save(final PokemonDTO dto) throws ParametroInvalidoException {
         if (Objects.isNull(dto))
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
@@ -37,6 +41,7 @@ public class PokemonService extends BaseService {
         return getConverter().map(pokemon, PokemonDTO.class);
     }
 
+    @Transactional
     public PokemonDTO update(final PokemonDTO dto) throws ParametroInvalidoException {
         if (dto == null || dto.getId() == null)
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_DTO_INVALIDO);
@@ -49,6 +54,7 @@ public class PokemonService extends BaseService {
         return getConverter().map(pokemon, PokemonDTO.class);
     }
 
+    @Transactional
     public MensagemRetornoDTO delete(final Long id) throws ParametroInvalidoException {
         if (id == null)
             throw new ParametroInvalidoException(MensagemUtil.MSG_PARAMETRO_ID_INVALIDO);

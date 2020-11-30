@@ -25,7 +25,7 @@ public class CategoriaHabilidade extends BaseEntity {
     private String nomeCategoriaHabilidade;
 
     @ManyToOne
-    @JoinColumn(name = "idHabilidade")
+    @JoinColumn(name = "idHabilidade", referencedColumnName = "idhabilidade")
     private Habilidade habilidade;
 
     @Enumerated(EnumType.STRING)

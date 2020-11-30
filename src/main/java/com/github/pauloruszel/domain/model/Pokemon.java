@@ -24,11 +24,11 @@ public class Pokemon extends BaseEntity {
     private String nomePokemon;
 
     @OneToOne
-    @JoinColumn(name = "idGenero")
+    @JoinColumn(name = "idGenero", referencedColumnName = "idgenero")
     private Genero genero;
 
     @OneToOne
-    @JoinColumn(name = "idCategoria")
+    @JoinColumn(name = "idCategoria", referencedColumnName = "idcategoria")
     private Categoria categoria;
 
 }
