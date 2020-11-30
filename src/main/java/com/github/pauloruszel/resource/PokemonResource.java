@@ -3,9 +3,9 @@ package com.github.pauloruszel.resource;
 import com.github.pauloruszel.domain.dtos.MensagemRetornoDTO;
 import com.github.pauloruszel.domain.dtos.PokemonDTO;
 import com.github.pauloruszel.domain.model.Pokemon;
+import com.github.pauloruszel.domain.util.MensagemUtil;
 import com.github.pauloruszel.exception.ParametroInvalidoException;
 import com.github.pauloruszel.service.PokemonService;
-import com.github.pauloruszel.domain.util.MensagemUtil;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import javax.inject.Inject;

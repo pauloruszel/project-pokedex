@@ -1,7 +1,5 @@
 package com.github.pauloruszel.domain.model;
 
-import com.github.pauloruszel.converter.GeneroConverter;
-import com.github.pauloruszel.domain.enumeration.GeneroEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Pokemon", schema = "pokedex")
 public class Pokemon extends BaseEntity {
 
     @Id
@@ -24,17 +23,12 @@ public class Pokemon extends BaseEntity {
     @Column(name = "nmPokemon", length = 50)
     private String nomePokemon;
 
-    @Column(name = "dsAltura", length = 10)
-    private String altura;
+    @OneToOne
+    @JoinColumn(name = "idGenero")
+    private Genero genero;
 
-    @Column(name = "dsPeso", length = 10)
-    private String peso;
-
-    @Column(name = "dsGenero", length = 1)
-    @Convert(converter = GeneroConverter.class)
-    private GeneroEnum genero;
-
-    @Column(name = "dsCategoria", length = 40)
-    private String categoria;
+    @OneToOne
+    @JoinColumn(name = "idCategoria")
+    private Categoria categoria;
 
 }

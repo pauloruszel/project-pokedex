@@ -1,5 +1,6 @@
 package com.github.pauloruszel.domain.dtos;
 
+import com.github.pauloruszel.domain.enumeration.SituacaoPadraoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ public class HabilidadeDTO implements BaseDTO {
 
     private Long id;
     private String nomeHabilidade;
-    private PokemonDTO pokemonDTO;
+    private SituacaoPadraoEnum ativo;
 
 }

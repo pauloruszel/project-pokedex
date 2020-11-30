@@ -12,17 +12,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Tipo extends BaseEntity {
+@Table(name = "FraquezaPokemon", schema = "pokedex")
+public class FraquezaPokemon extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTipo", length = 4, precision = 10)
+    @Column(name = "idFraquezaPokemon", length = 4, precision = 10)
     private Long id;
 
-    @Column(name = "nmTipo", length = 70)
-    private String nomeTipo;
+    @ManyToOne
+    @JoinColumn(name = "idFraqueza")
+    private Fraqueza fraqueza;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idPokemon")
     private Pokemon pokemon;
 

@@ -13,16 +13,20 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Fraqueza", schema = "pokedex")
-public class Fraqueza extends BaseEntity {
+@Table(name = "TipoHabilidade", schema = "pokedex")
+public class TipoHabilidade extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idFraqueza", length = 4, precision = 10)
+    @Column(name = "idTipoHabilidade", length = 4, precision = 10)
     private Long id;
 
-    @Column(name = "nmFraqueza", length = 70)
-    private String nomeFraqueza;
+    @Column(name = "nmTipoHabilidade", length = 70)
+    private String nomeTipoHabilidade;
+
+    @ManyToOne
+    @JoinColumn(name = "idHabilidade")
+    private Habilidade habilidade;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "stAtivo", nullable = false)

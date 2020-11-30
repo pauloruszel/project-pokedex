@@ -1,5 +1,6 @@
 package com.github.pauloruszel.domain.model;
 
+import com.github.pauloruszel.domain.enumeration.SituacaoPadraoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Habilidade", schema = "pokedex")
 public class Habilidade extends BaseEntity {
 
     @Id
@@ -22,8 +24,8 @@ public class Habilidade extends BaseEntity {
     @Column(name = "nmHabilidade", length = 70)
     private String nomeHabilidade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPokemon")
-    private Pokemon pokemon;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stAtivo", nullable = false)
+    private SituacaoPadraoEnum ativo;
 
 }
