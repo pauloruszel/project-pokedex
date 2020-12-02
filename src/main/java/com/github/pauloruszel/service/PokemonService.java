@@ -1,5 +1,6 @@
 package com.github.pauloruszel.service;
 
+import com.github.pauloruszel.converter.PokemonUpdateConverter;
 import com.github.pauloruszel.domain.dtos.MensagemRetornoDTO;
 import com.github.pauloruszel.domain.dtos.PokemonDTO;
 import com.github.pauloruszel.domain.model.Pokemon;
@@ -54,9 +55,9 @@ public class PokemonService extends BaseService {
         Pokemon pokemon = Pokemon.findById(id);
         if (Objects.isNull(pokemon))
             throw new ParametroInvalidoException(MensagemUtil.MSG_REGISTRO_NAO_ENCONTRADO);
-        final var pokemonEditado = getConverter().map(dto, Pokemon.class);
-        pokemon = pokemonEditado;
-        return getConverter().map(pokemon, PokemonDTO.class);
+
+        final var pokemonEditado = PokemonUpdateConverter.converter(pokemon, dto);
+        return getConverter().map(pokemonEditado, PokemonDTO.class);
     }
 
     @Transactional

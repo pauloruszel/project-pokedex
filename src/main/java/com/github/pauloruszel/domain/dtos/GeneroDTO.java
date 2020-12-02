@@ -13,7 +13,7 @@ import lombok.Setter;
 public class GeneroDTO implements BaseDTO {
 
     private Long id;
-    private String nomGenero;
+    private String nomeGenero;
     private SituacaoPadraoEnum ativo;
 
 }
